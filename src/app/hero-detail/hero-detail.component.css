@@ -22,3 +22,7 @@ button:disabled {
   color: #ccc;
   cursor: auto;
 }
+
+span b {
+  color: #435960;
+}
