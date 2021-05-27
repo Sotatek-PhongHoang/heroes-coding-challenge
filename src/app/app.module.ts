@@ -11,6 +11,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WeaponComponent } from './weapon/weapon.component';
 import { WeaponDetailComponent } from './weapon/weapon-detail/weapon-detail.component';
+import { ArmourComponent } from './armour/armour.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { WeaponDetailComponent } from './weapon/weapon-detail/weapon-detail.comp
     HeroDetailComponent,
     MessagesComponent,
     WeaponComponent,
-    WeaponDetailComponent
+    WeaponDetailComponent,
+    ArmourComponent
   ],
   bootstrap: [ AppComponent ]
 })
