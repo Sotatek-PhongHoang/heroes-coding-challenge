@@ -1,0 +1,55 @@
+.hero {
+  display: flex;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.hero:hover {
+  box-shadow: 0 1px 10px #ccc;
+}
+
+.hero.active {
+  border-color: #0d6efd;
+  border-radius: 4px;
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.hero-info {
+  margin-left: 0.5rem;
+}
+
+.hero-info p {
+  margin: 0 0 0.5rem;
+}
+
+.hero img {
+  border-radius: 4px;
+}
+
+.hero-info-name b {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 15ch;
+  white-space: nowrap;
+  display: block;
+}
+
+.hero-info-weapon:focus {
+  outline: none;
+}
+
+.hero-info-weapon {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+
+}
+
+@media screen and (max-width: 900px) {
+  .hero {
+    min-width: 230px;
+  }
+}

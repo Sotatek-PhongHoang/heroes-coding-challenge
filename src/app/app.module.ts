@@ -13,6 +13,7 @@ import { WeaponComponent } from './weapon/weapon.component';
 import { WeaponDetailComponent } from './weapon/weapon-detail/weapon-detail.component';
 import { ArmourComponent } from './armour/armour.component';
 import { ArmourDetailComponent } from './armour/armour-detail/armour-detail.component';
+import { HeroCardComponent } from './dashboard/hero-card/hero-card.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ArmourDetailComponent } from './armour/armour-detail/armour-detail.comp
     WeaponComponent,
     WeaponDetailComponent,
     ArmourComponent,
-    ArmourDetailComponent
+    ArmourDetailComponent,
+    HeroCardComponent,
   ],
   bootstrap: [ AppComponent ]
 })
