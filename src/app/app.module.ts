@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { WeaponComponent } from './weapon/weapon.component';
 import { WeaponDetailComponent } from './weapon/weapon-detail/weapon-detail.component';
 import { ArmourComponent } from './armour/armour.component';
+import { ArmourDetailComponent } from './armour/armour-detail/armour-detail.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ArmourComponent } from './armour/armour.component';
     MessagesComponent,
     WeaponComponent,
     WeaponDetailComponent,
-    ArmourComponent
+    ArmourComponent,
+    ArmourDetailComponent
   ],
   bootstrap: [ AppComponent ]
 })
