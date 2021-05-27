@@ -3,11 +3,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Weapon } from '../core/interface/weapon';
 import { cloneData } from '../core/utils/utils';
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import { Hero } from '../core/interface/hero';
 import { WeaponService } from '../weapon/weapon.service';
 import { GameService } from './game.service';
 import { MessageService } from '../message.service';
+import { HeroService } from '../heroes/hero.service';
 
 @Component({
   selector: 'app-dashboard',

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroesComponent } from './heroes/heroes.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { HeroDetailComponent } from './heroes/hero-detail/hero-detail.component';
 import { WeaponComponent } from './weapon/weapon.component';
 import { WeaponDetailComponent } from './weapon/weapon-detail/weapon-detail.component';
 import { ArmourComponent } from './armour/armour.component';

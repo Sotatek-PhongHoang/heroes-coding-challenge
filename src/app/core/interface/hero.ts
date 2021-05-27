@@ -1,5 +1,5 @@
-import { Armour } from './core/interface/armour';
-import { Weapon } from './core/interface/weapon';
+import { Armour } from './armour';
+import { Weapon } from './weapon';
 export interface Hero {
   id: number;
   name: string;

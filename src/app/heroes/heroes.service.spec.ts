@@ -1,6 +1,6 @@
 
 import { TestBed } from '@angular/core/testing';
-import { Hero } from './hero';
+import { Hero } from '../core/interface/hero';
 import { HeroService } from './hero.service';
 import { HEROES } from './mock-heroes';
 

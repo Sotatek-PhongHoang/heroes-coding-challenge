@@ -1,6 +1,6 @@
 import { Weapon } from 'src/app/core/interface/weapon';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Hero } from 'src/app/hero';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Hero } from 'src/app/core/interface/hero';
 
 @Component({
   selector: 'app-hero-card',

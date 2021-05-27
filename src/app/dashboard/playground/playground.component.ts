@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import Konva from 'konva';
-import { fromEvent, Observable, Subject } from 'rxjs';
-import { Hero } from 'src/app/hero';
+import { fromEvent, Subject } from 'rxjs';
+import { Hero } from 'src/app/core/interface/hero';
 import { GameService } from '../game.service';
 import { takeUntil } from 'rxjs/operators';
 import { cloneData } from 'src/app/core/utils/utils';

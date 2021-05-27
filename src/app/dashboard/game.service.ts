@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import Konva from 'konva';
 import { BehaviorSubject } from 'rxjs';
-import { Hero } from '../hero';
+import { Hero } from '../core/interface/hero';
 
 const COLOR_HEALTH = {
   SAFE: '#198754',

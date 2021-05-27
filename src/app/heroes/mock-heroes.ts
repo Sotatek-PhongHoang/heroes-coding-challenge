@@ -1,6 +1,7 @@
-import { ARMOURS } from './armour/mock-armour';
-import { Hero } from './hero';
-import { WEAPONS } from './weapon/mock-weapons';
+import { ARMOURS } from "../armour/mock-armour";
+import { Hero } from "../core/interface/hero";
+import { WEAPONS } from "../weapon/mock-weapons";
+
 
 export const HEROES: Hero[] = [
   { id: 11, name: 'Dr Nice', health: 100, weapon: WEAPONS[0], armour: ARMOURS[0], imageSrc: '../../assets/images/hero1.png' },
