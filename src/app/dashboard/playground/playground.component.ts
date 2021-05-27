@@ -134,7 +134,7 @@ export class PlaygroundComponent implements OnInit, AfterViewInit, OnDestroy {
       const heroesAfterFight = this.heroesPlaying.map((hero: Hero) => {
         const heroClone: Hero = cloneData(hero);
         heroClone.playingHealth = heroClone.playingHealth! + heroClone.weapon.damage - totalDamge;
-        const arcAngle = this.gameService.getAngle(heroClone.playingHealth, heroClone.health + heroClone.armour.health);
+        const arcAngle = this.gameService.getAngle(heroClone.playingHealth, heroClone.health + heroClone.armour.health, -1);
         (this.layer?.find(`#hero-${heroClone.id}-arc`)[0] as Konva.Arc).angle(arcAngle);
         
         if (heroClone.playingHealth <= 0 || (heroClone.playingHealth < 50 && hero.playingHealth! >= 50)) {

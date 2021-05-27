@@ -74,8 +74,8 @@ export class GameService {
    * @param total 
    * @returns 
    */
-  getAngle(number: number, total: number) {
-    return number / total * 360 * -1;
+  getAngle(number: number, total: number, ratio: number) {
+    return number / total * 360 * ratio;
   }
 
   /**
@@ -127,7 +127,7 @@ export class GameService {
     
     const circlebg = this.drawRing(x, y, imgWidth / 2, COLOR_HEALTH.BACKGROUND);
     const colorHealth = hero.playingHealth! >= 50 ? COLOR_HEALTH.SAFE : COLOR_HEALTH.DANGER;
-    const angle = this.getAngle(hero.playingHealth!, hero.health + hero.armour.health);
+    const angle = this.getAngle(hero.playingHealth!, hero.health + hero.armour.health, -1);
     const circle = this.drawArc(x, y, imgWidth / 2, colorHealth, angle, `${heroGroupId}-arc`);
 
     heroHroup.add(imageGroup, circlebg, circle);
