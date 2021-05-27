@@ -1,7 +1,18 @@
-<h2>Top Heroes</h2>
-<div class="heroes-menu">
-  <a *ngFor="let hero of heroes"
-    routerLink="/detail/{{hero.id}}">
-    {{hero.name}}
-  </a>
+<div class="dashboard">
+  <div class="dashboard-content">
+    <div class="playground">
+      <app-playground></app-playground>
+    </div>
+    <div class="heroes">
+      <app-hero-card
+        class="hero-card"
+        *ngFor="let hero of heroes; index as i"
+        [hero]="hero"
+        [weapons]="weapons"
+        [isActive]="isActive(hero.id)"
+        (toggleHero)="toggleHero($event, hero)"
+        (updateWeapon)="updateWeapon($event, i)"
+      ></app-hero-card>
+    </div>
+  </div>
 </div>

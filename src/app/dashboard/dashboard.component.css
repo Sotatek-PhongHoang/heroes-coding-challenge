@@ -1,50 +1,85 @@
-/* DashboardComponent's private CSS styles */
-
-h2 {
-  text-align: center;
-}
-
-.heroes-menu {
-  padding: 0;
-  margin: auto;
-  max-width: 1000px;
-
-  /* flexbox */
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-content: flex-start;
-  align-items: flex-start;
-}
-
-a {
-  background-color: #3f525c;
-  border-radius: 2px;
-  padding: 1rem;
-  font-size: 1.2rem;
-  text-decoration: none;
-  display: inline-block;
-  color: #fff;
-  text-align: center;
+.dashboard {
   width: 100%;
-  min-width: 70px;
-  margin: .5rem auto;
-  box-sizing: border-box;
-
-  /* flexbox */
-  order: 0;
-  flex: 0 1 auto;
-  align-self: auto;
+  max-height: 500px;
+  display: flex;
+  margin-top: 1rem;
 }
 
-@media (min-width: 600px) {
-  a {
-    width: 18%;
-    box-sizing: content-box;
+.dashboard-content {
+  display: flex;
+  width: 100%;
+}
+
+.dashboard-content .playground {
+  width: 70%;
+  height: 100%;
+  padding: 0.5rem 0.75rem;
+}
+
+.heroes {
+  height: 100%;
+  width: 30%;
+  overflow-y: auto;
+  padding: 0.5rem 0.25rem;
+}
+
+.heroes::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+.heroes::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+.heroes::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+.heroes::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.heroes .hero-card:not(:last-child) {
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+@media screen and (max-width: 900px) {
+  .dashboard {
+    max-height: inherit;
+  }
+
+  .dashboard-content {
+    flex-direction: column-reverse;
+  }
+
+  .dashboard-content .playground {
+    width: 100%;
+    height: 500px;
+  }
+
+  .heroes {
+    display: flex;
+    width: 100%;
+    height: auto;
+    overflow-x: auto;
+  }
+
+  .heroes .hero-card {
+    margin-bottom: 0 !important;
+    margin-right: 0.75rem;
   }
 }
 
-a:hover {
-  background-color: #000;
+@media screen and (max-width: 768px) {
+  .dashboard-content .playground {
+    padding: 0.5rem 0;
+  }
+
+  .heroes {
+    padding: 0;
+  }
 }

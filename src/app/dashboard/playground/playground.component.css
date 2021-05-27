@@ -1,0 +1,10 @@
+.playground-content {
+  width: 100%;
+  height: 100%;
+}
+/* 
+@media screen and (max-width: 900px) {
+  .playground-content {
+    height: 500px;
+  }
+} */
