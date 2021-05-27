@@ -74,7 +74,7 @@ export class GameService {
    * @param total 
    * @returns 
    */
-  getAngle(number: number, total: number, ratio: number) {
+  getAngle(number: number, total: number, ratio: number): number {
     return number / total * 360 * ratio;
   }
 

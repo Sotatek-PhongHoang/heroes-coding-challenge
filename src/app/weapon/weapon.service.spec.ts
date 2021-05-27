@@ -12,26 +12,28 @@ describe('Weapon service', () => {
     service = TestBed.inject(WeaponService);
   });
 
-  it('should be created', () => {
+  it('Init weapon service', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should be return mock weapon array', () => {
+  it('Get weapon list', () => {
     service.getWeapons().subscribe((weapons: Weapon[]) => {
       expect(weapons).toEqual(WEAPONS);
     })
   });
 
-  it('should be return weapon detail', () => {
-    const mockWeapon = WEAPONS[0];
-    service.getWeapon(mockWeapon.id).subscribe((weapon: Weapon | undefined) => {
-      expect(weapon).toEqual(mockWeapon);
+  describe('Get weapon detail', () => {
+    it('Get weapon detail by existed id', () => {
+      const mockWeapon = WEAPONS[0];
+      service.getWeapon(mockWeapon.id).subscribe((weapon: Weapon | undefined) => {
+        expect(weapon).toEqual(mockWeapon);
+      })
     })
-  })
-
-  it('should be return undefined', () => {
-    service.getWeapon(-1).subscribe((weapon: Weapon | undefined) => {
-      expect(weapon).toEqual(undefined);
+  
+    it('Get weapon detail by not existed id', () => {
+      service.getWeapon(-1).subscribe((weapon: Weapon | undefined) => {
+        expect(weapon).toEqual(undefined);
+      })
     })
   })
 });

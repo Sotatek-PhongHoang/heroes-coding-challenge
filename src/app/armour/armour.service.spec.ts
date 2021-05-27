@@ -4,7 +4,7 @@ import { Armour } from '../core/interface/armour';
 import { ArmourService } from './armour.service';
 import { ARMOURS } from './mock-armour';
 
-describe('Game service', () => {
+describe('Armour service', () => {
   let service: ArmourService;
 
   beforeEach(() => {
@@ -12,26 +12,28 @@ describe('Game service', () => {
     service = TestBed.inject(ArmourService);
   });
 
-  it('should be created', () => {
+  it('Init armour service', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should be return mock armour array', () => {
+  it('Get armour list', () => {
     service.getArmours().subscribe((armours: Armour[]) => {
       expect(armours).toEqual(ARMOURS);
     })
   });
 
-  it('should be return armour detail', () => {
-    const mockArmour = ARMOURS[0];
-    service.getArmour(mockArmour.id).subscribe((armour: Armour | undefined) => {
-      expect(armour).toEqual(mockArmour);
+  describe('Get detail armour by id', () => {
+    it('Get armour detail by existed id', () => {
+      const mockArmour = ARMOURS[0];
+      service.getArmour(mockArmour.id).subscribe((armour: Armour | undefined) => {
+        expect(armour).toEqual(mockArmour);
+      })
     })
-  })
-
-  it('should be return undefined', () => {
-    service.getArmour(-1).subscribe((armour: Armour | undefined) => {
-      expect(armour).toEqual(undefined);
+  
+    it('Get armour detail by not existed id', () => {
+      service.getArmour(-1).subscribe((armour: Armour | undefined) => {
+        expect(armour).toEqual(undefined);
+      })
     })
   })
 });
