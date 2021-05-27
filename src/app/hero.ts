@@ -7,4 +7,5 @@ export interface Hero {
   weapon: Weapon;
   armour: Armour;
   imageSrc: string;
+  playingHealth?: number;
 }

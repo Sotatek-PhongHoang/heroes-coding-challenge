@@ -15,8 +15,15 @@ const COLOR_HEALTH = {
 export class GameService {
   heroesPlaying = new BehaviorSubject<Hero[]>([]);
   updateGame = new BehaviorSubject<boolean>(false);
+  drawAgain = false;
 
   constructor() { }
+
+  updateHeroesPlaying(hero: Hero[], drawAgain?: boolean) {
+    this.drawAgain = !!drawAgain;
+    this.heroesPlaying.next(hero);
+  }
+
   /**
    * Draw a ring
    * @param x: x position
@@ -29,11 +36,46 @@ export class GameService {
     return new Konva.Ring({
       x,
       y,
-      innerRadius: radius - 3,
+      innerRadius: radius - 6,
       outerRadius: radius,
       fill: color,
       strokeWidth: 0
     })
+  }
+
+  /**
+   * draw a konva arc
+   * @param x 
+   * @param y 
+   * @param radius 
+   * @param color 
+   * @param angle 
+   * @param id 
+   * @returns 
+   */
+  drawArc(x: number, y: number, radius: number, color: string, angle: number, id: string) {
+    return new Konva.Arc({
+      x,
+      y,
+      innerRadius: radius - 6,
+      outerRadius: radius,
+      angle,
+      fill: color,
+      strokeWidth: 0,
+      rotation: -90,
+      clockwise: true,
+      id
+    });
+  }
+
+  /**
+   * get angle of arc
+   * @param number 
+   * @param total 
+   * @returns 
+   */
+  getAngle(number: number, total: number) {
+    return number / total * 360 * -1;
   }
 
   /**
@@ -61,6 +103,7 @@ export class GameService {
    * @returns: hero as Konva group
    */
   drawHero(hero: Hero, x: number, y: number, imgWidth: number, imgHeight: number, layer: Konva.Layer): Konva.Group {
+    const heroGroupId = `hero-${hero.id}`;
     const imageGroup = new Konva.Group({
       clipFunc: (ctx) => {
         ctx.arc(x, y, imgWidth / 2, 0, Math.PI * 2, false);
@@ -78,14 +121,16 @@ export class GameService {
 
     const heroHroup = new Konva.Group({
       x: 20,
-      y: 20
+      y: 20,
+      id: heroGroupId 
     });
     
-    // const circlebg = this.drawRing(x, y, imgWidth / 2, COLOR_HEALTH.BACKGROUND);
-    const colorHealth = hero.health >= 50 ? COLOR_HEALTH.SAFE : COLOR_HEALTH.DANGER;
-    const circle = this.drawRing(x, y, imgWidth / 2, colorHealth);
+    const circlebg = this.drawRing(x, y, imgWidth / 2, COLOR_HEALTH.BACKGROUND);
+    const colorHealth = hero.playingHealth! >= 50 ? COLOR_HEALTH.SAFE : COLOR_HEALTH.DANGER;
+    const angle = this.getAngle(hero.playingHealth!, hero.health + hero.armour.health);
+    const circle = this.drawArc(x, y, imgWidth / 2, colorHealth, angle, `${heroGroupId}-arc`);
 
-    heroHroup.add(imageGroup, circle);
+    heroHroup.add(imageGroup, circlebg, circle);
     return heroHroup;
   }
 

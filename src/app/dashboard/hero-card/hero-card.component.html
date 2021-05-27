@@ -2,6 +2,7 @@
   <img [src]="hero.imageSrc" alt="avatar hero" width="100" height="100">
   <div class="hero-info">
     <p class="hero-info-name"><b [title]="hero.name">{{ hero.name }}</b></p>
+    <p><b>Health</b>: {{ hero.health }}</p>
     <p><b>Armour</b>: {{ hero.armour?.health }}</p>
     <p><b>Damage</b>: {{ hero.weapon?.damage }}</p>
     <p>

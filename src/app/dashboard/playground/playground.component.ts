@@ -47,7 +47,9 @@ export class PlaygroundComponent implements OnInit, AfterViewInit, OnDestroy {
     .subscribe((heroes: Hero[]) => {
       if (this.playgroundRef) {
         this.heroesPlaying = heroes;
-        this.drawHeroes(heroes);
+        if (this.gameService.drawAgain) {
+          this.drawHeroes(heroes);
+        }
       }
     });
 
@@ -131,16 +133,19 @@ export class PlaygroundComponent implements OnInit, AfterViewInit, OnDestroy {
       
       const heroesAfterFight = this.heroesPlaying.map((hero: Hero) => {
         const heroClone: Hero = cloneData(hero);
-        heroClone.health = heroClone.health + heroClone.weapon.damage - totalDamge;
-        if (heroClone.health <= 0 || (heroClone.health < 50 && hero.health >= 50)) {
+        heroClone.playingHealth = heroClone.playingHealth! + heroClone.weapon.damage - totalDamge;
+        const arcAngle = this.gameService.getAngle(heroClone.playingHealth, heroClone.health + heroClone.armour.health);
+        (this.layer?.find(`#hero-${heroClone.id}-arc`)[0] as Konva.Arc).angle(arcAngle);
+        
+        if (heroClone.playingHealth <= 0 || (heroClone.playingHealth < 50 && hero.playingHealth! >= 50)) {
           drawAgain = true;
         }
 
         return heroClone;
       });
       
-      this.heroesPlaying = heroesAfterFight.filter((hero: Hero ) => hero.health > 0);
-      const heroesDie = heroesAfterFight.filter((hero: Hero ) => hero.health <= 0);
+      this.heroesPlaying = heroesAfterFight.filter((hero: Hero ) => hero.playingHealth! > 0);
+      const heroesDie = heroesAfterFight.filter((hero: Hero ) => hero.playingHealth! <= 0);
       if (heroesDie.length) {
         this.messageService.add(`Dashboard: Remove hero ${heroesDie.map(hero => hero.name).join(', ')}`);  
       }
@@ -150,10 +155,7 @@ export class PlaygroundComponent implements OnInit, AfterViewInit, OnDestroy {
         this.messageService.add('Game status: Game stop')
         this.isPlaying = false;
       }
-
-      if (drawAgain) {
-        this.gameService.heroesPlaying.next(this.heroesPlaying);
-      }
+      this.gameService.updateHeroesPlaying(this.heroesPlaying, drawAgain);
     }, 1000);
   }
 

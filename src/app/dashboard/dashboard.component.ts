@@ -75,14 +75,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   toggleHero(status: boolean, hero: Hero): void {
     if (status) {
       const heroClone: Hero = cloneData(hero);
-      heroClone.health += heroClone.armour?.health;
+      heroClone.playingHealth =  heroClone.health + heroClone.armour?.health;
       this.heroesPlaying.push(heroClone);
       this.messageService.add(`Dashboard: Adding hero ${heroClone.name}`);
     } else {
       this.heroesPlaying = this.heroesPlaying.filter(ele => ele.id !== hero.id);
       this.messageService.add(`Dashboard: Remove hero ${hero.name}`);
     }
-    this.gameService.heroesPlaying.next(this.heroesPlaying);
+    this.gameService.updateHeroesPlaying(this.heroesPlaying, true);
   }
 
   /**
@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (hero) {
         hero.weapon = weapon;
         this.gameService.updateGame.next(true);
-        this.gameService.heroesPlaying.next(this.heroesPlaying);
+        this.gameService.updateHeroesPlaying(this.heroesPlaying, true)
       }
       this.messageService.add(`Dashboard: Update ${this.heroes[index].name}'s weapon to ${weapon.name}`)
     }
