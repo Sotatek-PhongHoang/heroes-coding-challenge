@@ -1,4 +1,5 @@
 # The contest
+I completed all the minimum task of this project.
 
 The project is a simple fight simulator between heroes.
 In the dashboard screen, I have showed the battle ground and heroes list.
