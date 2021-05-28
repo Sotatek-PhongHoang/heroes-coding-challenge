@@ -119,7 +119,7 @@ export class GameService {
     };
     this.drawImage(hero.imageSrc, imageConfig, imageGroup, layer);
 
-    const heroHroup = new Konva.Group({
+    const heroGroup = new Konva.Group({
       x: 20,
       y: 20,
       id: heroGroupId 
@@ -130,8 +130,8 @@ export class GameService {
     const angle = this.getAngle(hero.playingHealth!, hero.health + hero.armour.health, -1);
     const circle = this.drawArc(x, y, imgWidth / 2, colorHealth, angle, `${heroGroupId}-arc`);
 
-    heroHroup.add(imageGroup, circlebg, circle);
-    return heroHroup;
+    heroGroup.add(imageGroup, circlebg, circle);
+    return heroGroup;
   }
 
   /**
