@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BaseWearable } from '../base-wearable/base-wearable';
 import { Weapon } from '../core/interface/weapon';
 import { WeaponService } from './weapon.service';
 
@@ -7,19 +8,19 @@ import { WeaponService } from './weapon.service';
   templateUrl: './weapon.component.html',
   styleUrls: ['./weapon.component.css']
 })
-export class WeaponComponent implements OnInit {
+export class WeaponComponent implements OnInit, BaseWearable {
   weapons: Weapon[] = [];
 
   constructor(private weaponService: WeaponService) { }
 
   ngOnInit() {
-    this.getWeapons();
+    this.getList();
   }
 
   /**
-   * get weapons
+   * get weapons list for show weapon list
    */
-  getWeapons(): void {
+  getList(): void {
     this.weaponService.getWeapons()
     .subscribe(weapons => this.weapons = weapons);
   }

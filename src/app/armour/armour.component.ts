@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Armour } from '../core/interface/armour';
+import { BaseWearable } from '../base-wearable/base-wearable';
 import { ArmourService } from './armour.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { ArmourService } from './armour.service';
   templateUrl: './armour.component.html',
   styleUrls: ['./armour.component.css']
 })
-export class ArmourComponent implements OnInit {
+export class ArmourComponent implements OnInit, BaseWearable {
   armours: Armour[] | undefined;
 
   constructor(
@@ -15,13 +16,13 @@ export class ArmourComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getWeapons();
+    this.getList();
   }
 
   /**
-   * get armours
+   * get armours list for show armours list
    */
-   getWeapons(): void {
+   getList(): void {
     this.armourService.getArmours()
     .subscribe((armours: Armour[]) => this.armours = armours);
   }
