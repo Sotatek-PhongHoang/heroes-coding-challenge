@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
    */
   getHeroes(): void {
     this.heroService.getHeroes()
+      .pipe(takeUntil(this.$unSubscribe))
       .subscribe(heroes => this.heroes = heroes);
   }
 
@@ -55,6 +56,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
    */
   getWeapons(): void {
     this.weaponService.getWeapons()
+      .pipe(takeUntil(this.$unSubscribe))
       .subscribe(weapons => this.weapons = weapons);
   }
 
