@@ -38,14 +38,32 @@
   display: block;
 }
 
-.hero-info-weapon:focus {
+.hero-info-select:focus {
   outline: none;
 }
 
-.hero-info-weapon {
+.hero-info-select {
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
 
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.hero-property {
+  margin: 0;
+  font-size: 12px;
+}
+
+.hero-property span {
+  margin-left: 0.25rem;
+}
+
+.hero-property + .hero-property {
+  margin-left: 0.25rem;
 }
 
 @media screen and (max-width: 900px) {

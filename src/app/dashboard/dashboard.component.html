@@ -9,6 +9,7 @@
         *ngFor="let hero of heroes; index as i"
         [hero]="hero"
         [weapons]="weapons"
+        [armours]="armours"
         [isActive]="isActive(hero.id)"
         (toggleHero)="toggleHero($event, hero)"
         (updateWeapon)="updateWeapon($event, i)"

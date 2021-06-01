@@ -8,6 +8,8 @@ import { WeaponService } from '../weapon/weapon.service';
 import { GameService } from './game.service';
 import { MessageService } from '../message.service';
 import { HeroService } from '../heroes/hero.service';
+import { Armour } from '../core/interface/armour';
+import { ArmourService } from '../armour/armour.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +19,7 @@ import { HeroService } from '../heroes/hero.service';
 export class DashboardComponent implements OnInit, OnDestroy {
   heroes: Hero[] = [];
   weapons: Weapon[] = [];
+  armours: Armour[] = [];
   heroesPlaying: Hero[] = [];
   $unSubscribe = new Subject();
 
@@ -24,13 +27,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private readonly heroService: HeroService,
     private readonly weaponService: WeaponService,
     private readonly gameService: GameService,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+    private readonly armourService: ArmourService
   ) { }
 
   ngOnInit() {
     this.heroesPlaying = this.gameService.heroesPlaying.value || [];
     this.getHeroes();
     this.getWeapons();
+    this.getArmours();
     this.gameService.heroesPlaying
     .pipe(takeUntil(this.$unSubscribe))
     .subscribe((heroes: Hero[]) => {
@@ -104,5 +109,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
       this.messageService.add(`Dashboard: Update ${this.heroes[index].name}'s weapon to ${weapon.name}`)
     }
+  }
+
+  /**
+   * get armours list armour select
+   */
+  getArmours(): void {
+    this.armourService.getArmours()
+    .pipe(takeUntil(this.$unSubscribe))
+    .subscribe((armours: Armour[]) => this.armours = armours);
   }
 }

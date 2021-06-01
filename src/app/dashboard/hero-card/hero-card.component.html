@@ -1,14 +1,33 @@
 <div class="hero" *ngIf="hero" [class.active]="isActive" (click)="toggleHero.emit(!isActive)">
-  <img [src]="hero.imageSrc" alt="avatar hero" width="100" height="100">
+  <div>
+    <img [src]="hero.imageSrc" alt="avatar hero" width="100" height="100">
+    <div class="row">
+      <p class="row hero-property">
+        <img src="assets/images/heart.svg" alt="icon health" width="14" height="14">
+        <span> {{ hero.health }}</span>
+      </p>
+      <p class="row hero-property">
+        <img src="assets/images/armor.svg" alt="icon health" width="14" height="14">
+        <span> {{ hero.armour.health }}</span>
+      </p>
+      <p class="row hero-property">
+        <img src="assets/images/sword.svg" alt="icon health" width="14" height="14">
+        <span> {{ hero.weapon.damage }}</span>
+      </p>
+    </div>
+  </div>
   <div class="hero-info">
     <p class="hero-info-name"><b [title]="hero.name">{{ hero.name }}</b></p>
-    <p><b>Health</b>: {{ hero.health }}</p>
-    <p><b>Armour</b>: {{ hero.armour?.health }}</p>
-    <p><b>Damage</b>: {{ hero.weapon?.damage }}</p>
-    <p>
-      <select (click)="clickWeapon($event)" (change)="changeWeapon($event)" [ngModel]="hero.weapon?.id" class="hero-info-weapon">
+    <p class="row"><b>Arm</b>: 
+      <select (click)="clickSelect($event)" (change)="changeArmour($event)" [ngModel]="hero.armour?.id" class="hero-info-select" [disabled]="isActive">
+        <option *ngFor="let armour of armours" [value]="armour.id">
+          {{ armour.name }}
+        </option>
+      </select>
+    </p>
+    <p class="row"><b>Wea</b>: 
+      <select (click)="clickSelect($event)" (change)="changeWeapon($event)" [ngModel]="hero.weapon?.id" class="hero-info-select">
         <option *ngFor="let weapon of weapons" [value]="weapon.id">
-          <!-- <img [src]="weapon.imageSrc" alt="weapon icon"> -->
           {{ weapon.name }}
         </option>
       </select>
