@@ -3,11 +3,15 @@ import { Observable, of } from 'rxjs';
 import { HEROES } from './mock-heroes';
 import { MessageService } from '../message.service';
 import { Hero } from '../core/interface/hero';
+import { WeaponService } from '../weapon/weapon.service';
+import { ArmourService } from '../armour/armour.service';
 
 @Injectable({ providedIn: 'root' })
 export class HeroService {
 
-  constructor(private messageService: MessageService) { }
+  constructor(
+    private readonly messageService: MessageService
+  ) { }
 
   getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES);
@@ -25,5 +29,20 @@ export class HeroService {
       this.messageService.add(`HeroService: Hero id=${id} not found`);
     }
     return of(hero);
+  }
+
+  /**
+   * update hero when change weapon or armour
+   * @param hero: hero updated
+   * @returns
+   */
+  updateHero(hero: Hero): Observable<Hero | undefined> {
+    const index = HEROES.findIndex(h => h.id === hero.id)!;
+    let result;
+    if (index !== -1) {
+      HEROES[index] = hero;
+      result = HEROES[index];
+    }
+    return of(result);
   }
 }

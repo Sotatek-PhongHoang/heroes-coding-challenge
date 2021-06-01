@@ -5,7 +5,20 @@
     <label for="hero-name">Hero name: </label>
     <input id="hero-name" [(ngModel)]="hero.name" placeholder="Hero name"/>
   </div>
-  <p><span><b>Weapon: </b></span>{{hero.weapon.name}} - <span><b>Dammage: </b></span>{{hero.weapon.damage}}</p>
-  <p><span><b>Armour: </b></span>{{hero.armour.name}} - <span><b>Health: </b></span>{{hero.armour.health}}</p>
+  <p><span><b>Weapon: </b></span>
+    <select *ngIf="weapons" (change)="changeWeapon($event)" [ngModel]="hero.weapon?.id">
+      <option *ngFor="let weapon of weapons" [value]="weapon.id">
+        <!-- <img [src]="weapon.imageSrc" alt="weapon icon"> -->
+        {{ weapon.name }} - damage: {{ weapon.damage }}
+      </option>
+    </select>
+  </p>
+  <p><span><b>Armour: </b></span>
+    <select *ngIf="armours" (change)="changeArmour($event)" [ngModel]="hero.armour?.id">
+      <option *ngFor="let armour of armours" [value]="armour.id">
+        {{ armour.name }} - health: {{ armour.health }}
+      </option>
+    </select>
+  </p>
   <button (click)="goBack()">go back</button>
 </div>
