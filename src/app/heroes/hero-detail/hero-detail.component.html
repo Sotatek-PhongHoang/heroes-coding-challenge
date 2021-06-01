@@ -5,6 +5,10 @@
     <label for="hero-name">Hero name: </label>
     <input id="hero-name" [(ngModel)]="hero.name" placeholder="Hero name"/>
   </div>
+  <p>
+    <label for="hero-health">Hero health: </label>
+    <input id="hero-health" [(ngModel)]="hero.health" placeholder="Hero health"/>
+  </p>
   <p><span><b>Weapon: </b></span>
     <select *ngIf="weapons" (change)="changeWeapon($event)" [ngModel]="hero.weapon?.id">
       <option *ngFor="let weapon of weapons" [value]="weapon.id">
