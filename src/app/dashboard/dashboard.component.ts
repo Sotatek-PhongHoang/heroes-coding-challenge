@@ -108,4 +108,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.$unSubscribe))
     .subscribe((armours: Armour[]) => this.armours = armours);
   }
+
+  /**
+   * update armour
+   * @param id 
+   * @param index 
+   */
+   updateArmour(id: number, index: number): void {
+    const armour = this.armours.find((ele: Armour) => ele.id === id);
+    if (armour) {
+      this.heroes[index].armour = armour;
+    }
+  }
 }
