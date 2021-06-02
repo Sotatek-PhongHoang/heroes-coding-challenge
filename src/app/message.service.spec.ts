@@ -22,8 +22,6 @@ describe('Weapon service', () => {
 
   it('Clear all message', () => {
     service.clear();
-    console.log(service.messages.length);
-    
     expect(service.messages.length).toEqual(0);
   });
 });

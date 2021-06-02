@@ -7,6 +7,15 @@
   transition: all 0.35s ease;
 }
 
+.hero.disabled {
+  pointer-events: none;
+  background-color: #ccc;
+}
+
+.hero.disabled select {
+  background-color: #ccc;
+}
+
 .hero:hover {
   box-shadow: 0 1px 10px #ccc;
 }

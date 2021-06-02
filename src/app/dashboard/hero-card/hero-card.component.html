@@ -1,4 +1,4 @@
-<div class="hero" *ngIf="hero" [class.active]="isActive" (click)="toggleHero.emit(!isActive)">
+<div class="hero" *ngIf="hero" [class.active]="isActive" (click)="toggleHero.emit(!isActive)" [class.disabled]="hero.health <= 0">
   <div>
     <img [src]="hero.imageSrc" alt="avatar hero" width="100" height="100">
     <div class="row">

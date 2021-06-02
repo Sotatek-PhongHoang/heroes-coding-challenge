@@ -20,31 +20,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
   heroes: Hero[] = [];
   weapons: Weapon[] = [];
   armours: Armour[] = [];
-  heroesPlaying: Hero[] = [];
   $unSubscribe = new Subject();
 
   constructor(
     private readonly heroService: HeroService,
     private readonly weaponService: WeaponService,
-    private readonly gameService: GameService,
+    public readonly gameService: GameService,
     private readonly messageService: MessageService,
     private readonly armourService: ArmourService
   ) { }
 
   ngOnInit() {
-    this.heroesPlaying = this.gameService.heroesPlaying.value || [];
     this.getHeroes();
     this.getWeapons();
     this.getArmours();
-    this.gameService.heroesPlaying
-    .pipe(takeUntil(this.$unSubscribe))
-    .subscribe((heroes: Hero[]) => {
-      this.heroesPlaying = heroes;
-    });
   }
 
   ngOnDestroy(): void {
     this.$unSubscribe.next();
+    this.gameService.heroesPlaying = [];
   }
 
   /**
@@ -71,7 +65,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
    * @returns: is active
    */
   isActive(id: number): boolean {
-    return !!this.heroesPlaying.find(hero => hero.id === id);
+    return !!this.gameService.heroesPlaying.find(hero => hero.id === id);
   }
 
   /**
@@ -81,15 +75,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
    */
   toggleHero(status: boolean, hero: Hero): void {
     if (status) {
-      const heroClone: Hero = cloneData(hero);
-      heroClone.playingHealth =  heroClone.health + heroClone.armour?.health;
-      this.heroesPlaying.push(heroClone);
-      this.messageService.add(`Dashboard: Adding hero ${heroClone.name}`);
+      this.gameService.addHeroPlaying(hero);
+      this.messageService.add(`Dashboard: Adding hero ${hero.name}`);
     } else {
-      this.heroesPlaying = this.heroesPlaying.filter(ele => ele.id !== hero.id);
+      this.gameService.removeHeroPlaying(hero);
       this.messageService.add(`Dashboard: Remove hero ${hero.name}`);
     }
-    this.gameService.updateHeroesPlaying(this.heroesPlaying, true);
   }
 
   /**
@@ -101,13 +92,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const weapon = this.weapons.find((ele: Weapon) => ele.id === id);
     if (weapon) {
       this.heroes[index].weapon = weapon;
-      const hero = this.heroesPlaying.find((hero: Hero) => hero.id === this.heroes[index].id);
-      if (hero) {
-        hero.weapon = weapon;
-        this.gameService.updateGame.next(true);
-        this.gameService.updateHeroesPlaying(this.heroesPlaying, true)
-      }
-      this.messageService.add(`Dashboard: Update ${this.heroes[index].name}'s weapon to ${weapon.name}`)
+      this.gameService.heroesPlaying.forEach((hero: Hero) => {
+        if (hero.id === this.heroes[index].id) {
+          hero.weapon = weapon;
+        }
+      })
     }
   }
 
