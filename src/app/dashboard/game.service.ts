@@ -47,8 +47,8 @@ export class GameService {
     return new Konva.Ring({
       x,
       y,
-      innerRadius: radius - 6,
-      outerRadius: radius,
+      innerRadius: radius >= 6 ? radius - 6 : 0,
+      outerRadius: radius >= 6 ? radius : 6,
       fill: color,
       strokeWidth: 0
     })
@@ -68,8 +68,8 @@ export class GameService {
     return new Konva.Arc({
       x,
       y,
-      innerRadius: radius - 6,
-      outerRadius: radius,
+      innerRadius: radius >= 6 ? radius - 6 : 0,
+      outerRadius: radius >= 6 ? radius : 6,
       angle,
       fill: color,
       strokeWidth: 0,
